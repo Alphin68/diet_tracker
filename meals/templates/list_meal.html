@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            List Meal
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <p><a href="{% url 'add_meal'%}">Add Meal</a></p>
+        {% if meal %}
+            <table>
+                <tr>
+                    <th>
+                        Meal Type
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+            {% for m in meal %}
+                <tr> 
+                    <td>{{m.mealtype}}</td>
+                    <td>{{m.date}}</td>
+                    <td><p><a href="{% url 'edit_meal' m.id %}">Edit</a></p></td>
+                    <td><p><a href="{% url 'delete_meal' m.id %}">Delete</a></p></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <p>No Meals</p>
+        {% endif %}
+    </body>
+</html>

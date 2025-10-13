@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            List Food
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <p><a href="{% url 'add_food'%}">Add Food</a></p>
+        {% if food %}
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Meal
+                    </th>
+                    <th>
+                        Protein
+                    </th>
+                    <th>
+                        Calories
+                    </th>
+                </tr>
+            {% for f in food %}
+                <tr> 
+                    <td>{{f.name}}</td>
+                    <td>{{f.meal}}</td>
+                    <td>{{f.protein}}</td>
+                    <td>{{f.calories}}</td>
+                    <td><p><a href="{% url 'edit_food' f.id %}">Edit</a></p></td>
+                    <td><p><a href="{% url 'delete_food' f.id %}">Delete</a></p></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <p>No Food</p>
+        {% endif %}
+    </body>
+</html>
