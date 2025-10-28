@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Meal, Food
 from .forms import MealForm, FoodForm
 from django.contrib import messages
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 def add_meal(request):
@@ -72,12 +74,29 @@ def edit_meal(request,id):
 def delete_meal(request,id):
     meal = get_object_or_404(Meal, id = id)
     meal.delete()
-    messages.warning(request, "Deleted meal")
+    messages.warning(request, "Meal Deleted ")
     return redirect('list_meal')
 
 def delete_food(request,id):
     food = get_object_or_404(Food, id = id)
     food.delete()
-    messages.warning(request, "Deleted food")
+    messages.warning(request, "Food Deleted ")
     return redirect('list_food')
 
+
+
+class ListMealView(APIView):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return Response({"error":"User not authenticated"}, status=401)
+        
+        user = request.user
+        meals = Meal.objects.filter(user=user)
+        data = [
+            {
+                "Name": meal.mealtype ,
+                "Date": meal.date
+            }
+            for meal in meals
+        ]
+        return Response({"meals": data})

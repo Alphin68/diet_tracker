@@ -18,7 +18,7 @@ class UserProfile(models.Model):
         ('OTHER','OTHER')
         ]
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    date_of_birth = models.DateField(null=True,blank=True)
+    date_of_birth = models.DateField()
     weight = models.FloatField(null=True)
     height = models.FloatField(null=True)
     gender = models.CharField(choices=GENDER_CHOICE,null=True,blank=True, max_length=10)

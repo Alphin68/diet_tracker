@@ -4,14 +4,93 @@
         <title>
             Login
         </title>
+        
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "poppins", sans-serif;
+                background: 
+                    url(https://media.licdn.com/dms/image/v2/D5612AQE2p09TCgrVDw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1699269169566?e=2147483647&v=beta&t=sLyLpQXDuxShwgyiQPoXm3zgvFv_NY8nlF0v-KgLeFw) center/cover  no-repeat,
+                    linear-gradient(135deg, #52b788, #2d6a4f);
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
+
+            .container {
+                text-align: center;
+                background: rgba(255, 255, 255, 0.4);
+                padding: 40px;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                border-radius: 15px;
+                width: 300px;
+            }
+
+            button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: 0.3s;
+                margin-top: 10px;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+
+            a {
+                text-decoration: none;
+                color: #007bff;
+                font-weight: 500;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+
+            p {
+                margin-top: 15px;
+            }
+
+            label {
+                text-align: left;
+                font-weight: 500;
+                color: #0c0c0c;
+            }
+
+
+            input, select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 14px;
+                outline: none;
+            }
+            input:focus, select:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            }
+
+        </style>
     </head>
     <body>
+        <div class="container">
         <form method="post">
             {% csrf_token %}
             {{form.as_p}}
+            <div class="buttons">
             <button type="submit">
                 Login
             </button>
+            <p><a href="{% url 'register' %}">create account</a></p>
         </form>
+    </div>
+    </div>
     </body>
 </html>
